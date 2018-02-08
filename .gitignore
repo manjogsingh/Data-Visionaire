@@ -4,6 +4,15 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+/UnityPackageManager
+/Packages
+
+#Visual Studio Code
+/.vscode/
+
+#SteamVR
+/Assets/SteamVR/
+/Assets/SteamVR.meta
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -22,6 +31,10 @@ ExportedObj/
 *.booproj
 *.svd
 *.pdb
+
+#Blender meta
+*.blend1
+*.blend1.meta
 
 # Unity3D generated meta files
 *.pidb.meta
