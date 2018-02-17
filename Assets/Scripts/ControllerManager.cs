@@ -100,7 +100,6 @@ public class ControllerManager : MonoBehaviour {
 
     void OnTriggerStay (Collider other) {
         if (other.gameObject.CompareTag ("State")) {
-
             if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
                 GrabObject (other);
             } else if (device.GetPressUp (SteamVR_Controller.ButtonMask.Trigger)) {
@@ -115,8 +114,15 @@ public class ControllerManager : MonoBehaviour {
         set { pos = value; }
     }
 
+    Quaternion rot;
+    Quaternion defaultRotation {
+        get { return rot; }
+        set { rot = value; }
+    }
+
     void GrabObject (Collider other) {
-        defaultPosition = other.transform.position;
+        defaultPosition = other.transform.localPosition;
+        defaultRotation = other.transform.localRotation;
         other.transform.SetParent (gameObject.transform);
         other.GetComponent<Rigidbody> ().isKinematic = true;
         device.TriggerHapticPulse (2000);
@@ -125,7 +131,8 @@ public class ControllerManager : MonoBehaviour {
     void ReleaseObject (Collider other) {
         other.transform.SetParent (India.transform);
         other.GetComponent<Rigidbody> ().isKinematic = false;
-        other.transform.position = defaultPosition;
+        other.transform.localPosition = defaultPosition;
+        other.transform.localRotation = defaultRotation;
     }
 
     void SwipeLeft () {
