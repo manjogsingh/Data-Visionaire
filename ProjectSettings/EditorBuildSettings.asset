@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Rainfall.unity
+    guid: ad4354ab6835d4f4ea6494cae883737d
+  - enabled: 1
+    path: Assets/Scenes/ScatterPlot.unity
+    guid: 8df5dd90b81163f468aec9081499e94f

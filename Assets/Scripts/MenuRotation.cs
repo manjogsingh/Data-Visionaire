@@ -70,4 +70,8 @@ public class MenuRotation : MonoBehaviour {
 			previousYear.text = year[index - 1].ToString ();
 		}
 	}
+
+	public int GetYear () {
+		return year[index];
+	}
 }
