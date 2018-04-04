@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - State
-  - UI
+  - Button
+  - Toggle
   layers:
   - Default
   - TransparentFX

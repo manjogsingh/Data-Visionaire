@@ -20,27 +20,12 @@ public class ControllerManager : MonoBehaviour {
 	public bool isLeftHanded;
 	#endregion
 
-	#region Swipe
-	float swipeSum;
-	float touchLast;
-	float touchCurrent;
-	float distance;
-	bool hasSwipedLeft;
-	bool hasSwipedRight;
-	public GameObject yearRotation;
-	#endregion
-
-	#region UI Elements
-	public Text stateName;
-	public Text stateRainfall;
-	public Text stateYear;
-	public GameObject spot;
-	public GameObject data;
-	#endregion
-	[Header("UI")]
+	[Header ("UI")]
+	public Button plot, cluster, menuPlot;
 	public DataPlotter dataPlotter;
 	public Clustering clustering;
 	public CropSelector cropSelector;
+	public DataGraphProduction menuPloter;
 
 	public Toggle Arhar, Cotton, Gram, Groundnut, Maize, Mung, Paddy, Mustard, Sugarcane, Wheat;
 
@@ -54,76 +39,37 @@ public class ControllerManager : MonoBehaviour {
 		device = SteamVR_Controller.Input ((int) trackedObject.index);
 		if (isLeftHanded) {
 			if (device.GetTouch (SteamVR_Controller.ButtonMask.Touchpad)) {
-				laser.gameObject.SetActive (true);
 
+				laser.gameObject.SetActive (true);
 				laser.SetPosition (0, gameObject.transform.position);
 				RaycastHit hit;
-				if (Physics.Raycast (transform.position, transform.forward, out hit, 10, laserMask)) {
 
-					if (hit.transform.gameObject.layer == 8) {
-						teleportAimer.SetActive (true);
-						spot.SetActive (false);
-						teleportLocation = hit.point;
-						laser.SetPosition (1, teleportLocation);
-						teleportAimer.transform.position = new Vector3 (teleportLocation.x, teleportLocation.y + yNudge, teleportLocation.z);
-					} else if (hit.transform.gameObject.layer == 9) {
-						teleportAimer.SetActive (false);
-						spot.SetActive (true);
-						laser.SetPosition (1, hit.point);
-						spot.transform.position = hit.point;
-						stateName.text = hit.transform.name;
-						stateYear.text = yearRotation.GetComponent<MenuRotation> ().GetYear ().ToString ();
-						string x = stateRainfall.text + " " + data.GetComponent<DataParser> ().GetRainfallValues (stateName.text, stateYear.text);
-						stateRainfall.text = x;
-					}
+				if (Physics.Raycast (transform.position, transform.forward, out hit, 10, laserMask)) {
+					teleportAimer.SetActive (true);
+					teleportLocation = hit.point;
+					laser.SetPosition (1, teleportLocation);
+					teleportAimer.transform.position = new Vector3 (teleportLocation.x, teleportLocation.y + yNudge, teleportLocation.z);
 				}
 			}
 
 			if (device.GetTouchUp (SteamVR_Controller.ButtonMask.Touchpad)) {
 				laser.gameObject.SetActive (false);
 				teleportAimer.SetActive (false);
-				spot.SetActive (false);
 				Player.transform.position = teleportLocation;
 			}
 		} else {
-			if (device.GetTouchDown (SteamVR_Controller.ButtonMask.Touchpad)) {
-				yearRotation.SetActive (true);
-				touchLast = device.GetAxis (Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad).x;
-			}
-
 			if (device.GetTouch (SteamVR_Controller.ButtonMask.Touchpad)) {
-				touchCurrent = device.GetAxis (Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad).x;
-				distance = touchCurrent - touchLast;
-				touchLast = touchCurrent;
-				swipeSum += distance;
-				if (!hasSwipedRight) {
-					if (swipeSum > 0.3f) {
-						swipeSum = 0;
-						SwipeRight ();
-						hasSwipedRight = true;
-						hasSwipedLeft = false;
-					}
-				}
-				if (!hasSwipedLeft) {
-					if (swipeSum < -0.3f) {
-						swipeSum = 0;
-						SwipeLeft ();
-						hasSwipedLeft = true;
-						hasSwipedRight = false;
-					}
-				}
-			}
 
-			if (device.GetTouchUp (SteamVR_Controller.ButtonMask.Touchpad)) {
-				swipeSum = 0;
-				touchCurrent = 0;
-				touchLast = 0;
-				hasSwipedLeft = false;
-				hasSwipedRight = false;
-				yearRotation.SetActive (false);
+				laser.gameObject.SetActive (true);
+				laser.SetPosition (0, gameObject.transform.position);
+				RaycastHit hit;
+
+				if (Physics.Raycast (transform.position, transform.forward, out hit, 10, laserMask)) {
+					teleportLocation = hit.point;
+					laser.SetPosition (1, teleportLocation);
+				}
 			}
 		}
-
 	}
 
 	void OnTriggerStay (Collider other) {
@@ -133,6 +79,29 @@ public class ControllerManager : MonoBehaviour {
 			} else if (device.GetPressUp (SteamVR_Controller.ButtonMask.Trigger)) {
 				ReleaseObject (other);
 			}
+		} else if (other.gameObject.CompareTag ("Button")) {
+			if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+				string buttonName = other.gameObject.name;
+				switch (buttonName) {
+					case "Plot":
+						plot.onClick.AddListener (Plot);
+						plot.onClick.Invoke ();
+						break;
+					case "Cluster":
+						cluster.onClick.AddListener (Cluster);
+						plot.onClick.Invoke ();
+						break;
+					case "MenuPlot":
+						menuPlot.onClick.AddListener (MenuPlot);
+						plot.onClick.Invoke ();
+						break;
+				}
+			}
+		} else if (other.gameObject.CompareTag ("Toggle")) {
+			if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+				string toggleName = other.gameObject.name;
+				cropSelector.setCrop (toggleName);
+			}
 		}
 	}
 
@@ -140,6 +109,16 @@ public class ControllerManager : MonoBehaviour {
 		if (other.gameObject.CompareTag ("UI")) {
 			PressButton (other.name);
 		}
+	}
+
+	void Plot () {
+		dataPlotter.selectState ("Bihar");
+	}
+	void Cluster () {
+		clustering.Cluster ();
+	}
+	void MenuPlot () {
+		menuPloter.PlotFile ();
 	}
 
 	void PressButton (string name) {
@@ -210,11 +189,4 @@ public class ControllerManager : MonoBehaviour {
 		other.transform.localRotation = defaultRotation;
 	}
 
-	void SwipeLeft () {
-		yearRotation.GetComponent<MenuRotation> ().MenuLeft ();
-	}
-
-	void SwipeRight () {
-		yearRotation.GetComponent<MenuRotation> ().MenuRight ();
-	}
 }
