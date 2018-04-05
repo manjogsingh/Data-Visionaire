@@ -20,12 +20,13 @@ public class ControllerManager : MonoBehaviour {
 	public bool isLeftHanded;
 	#endregion
 
-	[Header ("UI")]
-	public Button plot, cluster, menuPlot;
+	[Header ("Script Refrences")]
+	//public Button plot, cluster, menuPlot;
 	public DataPlotter dataPlotter;
 	public Clustering clustering;
 	public CropSelector cropSelector;
 	public DataGraphProduction menuPloter;
+	public ButtonController buttonController;
 
 	public Toggle Arhar, Cotton, Gram, Groundnut, Maize, Mung, Paddy, Mustard, Sugarcane, Wheat;
 
@@ -79,35 +80,38 @@ public class ControllerManager : MonoBehaviour {
 			} else if (device.GetPressUp (SteamVR_Controller.ButtonMask.Trigger)) {
 				ReleaseObject (other);
 			}
-		} else if (other.gameObject.CompareTag ("Button")) {
-			if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
-				string buttonName = other.gameObject.name;
-				switch (buttonName) {
-					case "Plot":
-						plot.onClick.AddListener (Plot);
-						plot.onClick.Invoke ();
-						break;
-					case "Cluster":
-						cluster.onClick.AddListener (Cluster);
-						plot.onClick.Invoke ();
-						break;
-					case "MenuPlot":
-						menuPlot.onClick.AddListener (MenuPlot);
-						plot.onClick.Invoke ();
-						break;
-				}
-			}
-		} else if (other.gameObject.CompareTag ("Toggle")) {
-			if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
-				string toggleName = other.gameObject.name;
-				cropSelector.setCrop (toggleName);
-			}
+		// } else if (other.gameObject.CompareTag ("Button")) {
+		// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+		// 		string buttonName = other.gameObject.name;
+		// 		switch (buttonName) {
+		// 			case "Plot":
+		// 				plot.onClick.AddListener (Plot);
+		// 				plot.onClick.Invoke ();
+		// 				break;
+		// 			case "Cluster":
+		// 				cluster.onClick.AddListener (Cluster);
+		// 				plot.onClick.Invoke ();
+		// 				break;
+		// 			case "MenuPlot":
+		// 				menuPlot.onClick.AddListener (MenuPlot);
+		// 				plot.onClick.Invoke ();
+		// 				break;
+		// 		}
+		// 	}
+		// } else if (other.gameObject.CompareTag ("Toggle")) {
+		// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+		// 		string toggleName = other.gameObject.name;
+		// 		cropSelector.setCrop (toggleName);
+		// 	}
 		}
 	}
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag ("UI")) {
 			PressButton (other.name);
+		}
+		else if(other.gameObject.CompareTag("Button")){
+			buttonController.ButtonPress(other.name);
 		}
 	}
 
