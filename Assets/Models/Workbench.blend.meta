@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: 09623042b872eab458f56fe7fac5cc1e
+timeCreated: 1522931036
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: BezierCircle_000
+    100004: BezierCircle_001
+    100006: Button1
+    100008: Button10
+    100010: Button11
+    100012: Button12
+    100014: Button13
+    100016: Button2
+    100018: Button3
+    100020: Button4
+    100022: Button4_001
+    100024: Button5
+    100026: Button6
+    100028: Button7
+    100030: Button8
+    100032: Button9
+    100034: Bench
+    100036: Buttons
+    400000: //RootNode
+    400002: BezierCircle_000
+    400004: BezierCircle_001
+    400006: Button1
+    400008: Button10
+    400010: Button11
+    400012: Button12
+    400014: Button13
+    400016: Button2
+    400018: Button3
+    400020: Button4
+    400022: Button4_001
+    400024: Button5
+    400026: Button6
+    400028: Button7
+    400030: Button8
+    400032: Button9
+    400034: Bench
+    400036: Buttons
+    2100000: MainTex
+    2100002: LED
+    2100004: MainTex_001
+    2300000: //RootNode
+    2300002: Button1
+    2300004: Button10
+    2300006: Button11
+    2300008: Button12
+    2300010: Button2
+    2300012: Button3
+    2300014: Button4
+    2300016: Button5
+    2300018: Button6
+    2300020: Button7
+    2300022: Button8
+    2300024: Button9
+    2300026: Bench
+    3300000: //RootNode
+    3300002: Button1
+    3300004: Button10
+    3300006: Button11
+    3300008: Button12
+    3300010: Button2
+    3300012: Button3
+    3300014: Button4
+    3300016: Button5
+    3300018: Button6
+    3300020: Button7
+    3300022: Button8
+    3300024: Button9
+    3300026: Bench
+    4300000: BezierCircle_001
+    4300002: BezierCircle_000
+    4300004: Button13
+    4300006: Button12
+    4300008: Button11
+    4300010: Button10
+    4300012: Button9
+    4300014: Button8
+    4300016: Button7
+    4300018: Button6
+    4300020: Button5
+    4300022: Button4_001
+    4300024: Button4
+    4300026: Button3
+    4300028: Button2
+    4300030: Button1
+    4300032: Bench
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: BezierCircle_000
+    13700002: BezierCircle_001
+    13700004: Button1
+    13700006: Button10
+    13700008: Button11
+    13700010: Button12
+    13700012: Button13
+    13700014: Button2
+    13700016: Button3
+    13700018: Button4
+    13700020: Button4_001
+    13700022: Button5
+    13700024: Button6
+    13700026: Button7
+    13700028: Button8
+    13700030: Button9
+    13700032: Bench
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LED
+    second: {fileID: 2100000, guid: b593ad07a56c275469d19c1eb47dcdce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MainTex
+    second: {fileID: 2100000, guid: 358f592696b23244ab12bd5d2614ca92, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
