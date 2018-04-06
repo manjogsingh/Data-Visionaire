@@ -12,6 +12,8 @@ public class DataGraphProduction : MonoBehaviour {
 	public float plotScaleX = 100;
 	public float plotScaleY = 100;
 
+	public Text cropName;
+
 	// Indices for columns to be assigned
 	int year = 0, Rice = 1, Maize = 2, Wheat = 3, Gram = 4, Arhar = 5, Moong = 6, groundNuts = 7, Mustard = 8, Cotton = 9, Sugercane = 10;
 
@@ -79,8 +81,9 @@ public class DataGraphProduction : MonoBehaviour {
 
 	public void DisableRest (string lineName) {
 		for (int i = 0; i < transform.childCount; i++) {
-			if(transform.GetChild(i).name.Equals(lineName)){
+			if (transform.GetChild (i).name.Equals (lineName)) {
 				transform.GetChild (i).gameObject.SetActive (true);
+				cropName.text = lineName;
 				continue;
 			}
 			transform.GetChild (i).gameObject.SetActive (false);
