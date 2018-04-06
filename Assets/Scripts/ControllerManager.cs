@@ -111,6 +111,7 @@ public class ControllerManager : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag ("Button")) {
+			device.TriggerHapticPulse(2000);
 			buttonController.ButtonPress (other.name);
 			PressButton (other.transform);
 		}
