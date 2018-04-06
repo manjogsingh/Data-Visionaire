@@ -134,10 +134,10 @@ public class ControllerManager : MonoBehaviour {
 			case "Arhar":
 			case "Cotton":
 			case "Gram":
-			case "Groundnut":
+			case "Ground Nuts":
 			case "Maize":
-			case "Mung":
-			case "Paddy":
+			case "Moong":
+			case "Rice":
 			case "Mustard":
 			case "Sugarcane":
 			case "Wheat":
@@ -172,5 +172,4 @@ public class ControllerManager : MonoBehaviour {
 		other.transform.localPosition = defaultPosition;
 		other.transform.localRotation = defaultRotation;
 	}
-
 }
