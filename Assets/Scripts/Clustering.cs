@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System;
 
 public class Clustering : MonoBehaviour {
 
@@ -24,29 +25,33 @@ public class Clustering : MonoBehaviour {
 	public void Cluster () {
 		thresholdPoint = threshold.GetComponent<Threshold> ().setActiveThreshold ();
 
-		center = thresholdPoint.transform.position;
-		hitColliders = Physics.OverlapSphere (center, radius, 1 << 10);
+		try {
+			center = thresholdPoint.transform.position;
+			hitColliders = Physics.OverlapSphere (center, radius, 1 << 10);
 
-		foreach (Collider col in hitColliders) {
-			//if (col.name != thresholdPoint.name) {
-			if (col.name.StartsWith ("West") || col.name.StartsWith ("Mumbai") || col.name.StartsWith ("Jaipur")) {
-				neighbours.Add (col);
-				positions.Add (col.transform.position);
+			foreach (Collider col in hitColliders) {
+				//if (col.name != thresholdPoint.name) {
+				if (col.name.StartsWith ("West") || col.name.StartsWith ("Mumbai") || col.name.StartsWith ("Jaipur")) {
+					neighbours.Add (col);
+					positions.Add (col.transform.position);
+				}
 			}
-		}
 
-		westbengal.GetComponent<Renderer>().material.color=Color.blue;
-		maharastra.GetComponent<Renderer>().material.color=Color.blue;
-		rajasthan.GetComponent<Renderer>().material.color=Color.blue;
+			westbengal.GetComponent<Renderer> ().material.color = Color.blue;
+			maharastra.GetComponent<Renderer> ().material.color = Color.blue;
+			rajasthan.GetComponent<Renderer> ().material.color = Color.blue;
 
-		Sequence inOut = DOTween.Sequence ();
-		foreach (var col in neighbours) {
-			inOut.Insert (0, (col.transform.DOMove (center, speed, false)));
-		}
+			Sequence inOut = DOTween.Sequence ();
+			foreach (var col in neighbours) {
+				inOut.Insert (0, (col.transform.DOMove (center, speed, false)));
+			}
 
-		for (var i = 0; i < positions.Count; i++) {
-			inOut.Insert (speed, (neighbours[i].transform.DOMove (positions[i], speed, false)));
-			inOut.Insert (speed, (neighbours[i].GetComponent<Renderer> ().material.DOColor (Color.red, speed)));
+			for (var i = 0; i < positions.Count; i++) {
+				inOut.Insert (speed, (neighbours[i].transform.DOMove (positions[i], speed, false)));
+				inOut.Insert (speed, (neighbours[i].GetComponent<Renderer> ().material.DOColor (Color.red, speed)));
+			}
+		} catch (Exception e) {
+			Debug.LogException(e);
 		}
 	}
 
