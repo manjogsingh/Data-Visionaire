@@ -70,6 +70,9 @@ public class ControllerManager : MonoBehaviour {
 					laser.SetPosition (1, teleportLocation);
 				}
 			}
+			if (device.GetTouchUp (SteamVR_Controller.ButtonMask.Touchpad)) {
+				laser.gameObject.SetActive (false);
+			}
 		}
 	}
 
@@ -80,88 +83,64 @@ public class ControllerManager : MonoBehaviour {
 			} else if (device.GetPressUp (SteamVR_Controller.ButtonMask.Trigger)) {
 				ReleaseObject (other);
 			}
-		// } else if (other.gameObject.CompareTag ("Button")) {
-		// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
-		// 		string buttonName = other.gameObject.name;
-		// 		switch (buttonName) {
-		// 			case "Plot":
-		// 				plot.onClick.AddListener (Plot);
-		// 				plot.onClick.Invoke ();
-		// 				break;
-		// 			case "Cluster":
-		// 				cluster.onClick.AddListener (Cluster);
-		// 				plot.onClick.Invoke ();
-		// 				break;
-		// 			case "MenuPlot":
-		// 				menuPlot.onClick.AddListener (MenuPlot);
-		// 				plot.onClick.Invoke ();
-		// 				break;
-		// 		}
-		// 	}
-		// } else if (other.gameObject.CompareTag ("Toggle")) {
-		// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
-		// 		string toggleName = other.gameObject.name;
-		// 		cropSelector.setCrop (toggleName);
-		// 	}
+			// } else if (other.gameObject.CompareTag ("Button")) {
+			// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+			// 		string buttonName = other.gameObject.name;
+			// 		switch (buttonName) {
+			// 			case "Plot":
+			// 				plot.onClick.AddListener (Plot);
+			// 				plot.onClick.Invoke ();
+			// 				break;
+			// 			case "Cluster":
+			// 				cluster.onClick.AddListener (Cluster);
+			// 				plot.onClick.Invoke ();
+			// 				break;
+			// 			case "MenuPlot":
+			// 				menuPlot.onClick.AddListener (MenuPlot);
+			// 				plot.onClick.Invoke ();
+			// 				break;
+			// 		}
+			// 	}
+			// } else if (other.gameObject.CompareTag ("Toggle")) {
+			// 	if (device.GetPressDown (SteamVR_Controller.ButtonMask.Trigger)) {
+			// 		string toggleName = other.gameObject.name;
+			// 		cropSelector.setCrop (toggleName);
+			// 	}
 		}
 	}
 
 	void OnTriggerEnter (Collider other) {
-		if (other.gameObject.CompareTag ("UI")) {
-			PressButton (other.name);
-		}
-		else if(other.gameObject.CompareTag("Button")){
-			buttonController.ButtonPress(other.name);
+		if (other.gameObject.CompareTag ("Button")) {
+			buttonController.ButtonPress (other.name);
+			PressButton (other.transform);
 		}
 	}
 
-	void Plot () {
-		dataPlotter.selectState ("Bihar");
-	}
-	void Cluster () {
-		clustering.Cluster ();
-	}
-	void MenuPlot () {
-		menuPloter.PlotFile ();
-	}
-
-	void PressButton (string name) {
-		switch (name) {
-			case "Plot":
+	void PressButton (Transform button) {
+		switch (button.name) {
+			case "Button1":
 				dataPlotter.selectState ("Bihar");
 				break;
-			case "Cluster":
+			case "Button2":
 				clustering.Cluster ();
 				break;
+			case "Button3":
+				menuPloter.PlotFile ();
+				break;
+			case "Button4":
+				buttonController.ActivateSubMenu (button);
+				break;
 			case "Arhar":
-				cropSelector.setCrop ("Arhar");
-				break;
 			case "Cotton":
-				cropSelector.setCrop ("Cotton");
-				break;
 			case "Gram":
-				cropSelector.setCrop ("Gram");
-				break;
 			case "Groundnut":
-				cropSelector.setCrop ("Groundnut");
-				break;
 			case "Maize":
-				cropSelector.setCrop ("Maize");
-				break;
 			case "Mung":
-				cropSelector.setCrop ("Mung");
-				break;
 			case "Paddy":
-				cropSelector.setCrop ("Paddy");
-				break;
 			case "Mustard":
-				cropSelector.setCrop ("Mustard");
-				break;
 			case "Sugarcane":
-				cropSelector.setCrop ("Sugarcane");
-				break;
 			case "Wheat":
-				cropSelector.setCrop ("Wheat");
+				cropSelector.setCrop (name);
 				break;
 		}
 	}
