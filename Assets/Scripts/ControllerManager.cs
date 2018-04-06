@@ -111,14 +111,15 @@ public class ControllerManager : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.CompareTag ("Button")) {
-			device.TriggerHapticPulse(2000);
+			device.TriggerHapticPulse (2000);
 			buttonController.ButtonPress (other.name);
 			PressButton (other.transform);
 		}
 	}
 
 	void PressButton (Transform button) {
-		switch (button.name) {
+		string name = button.name;
+		switch (name) {
 			case "Button1":
 				dataPlotter.selectState ("Bihar");
 				break;
@@ -132,15 +133,53 @@ public class ControllerManager : MonoBehaviour {
 				buttonController.ActivateSubMenu (button);
 				break;
 			case "Arhar":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (5, name, 3200, 2200);
+				cropSelector.setCrop (name);
+				break;
 			case "Cotton":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (9, name, 36000, 18000);
+				cropSelector.setCrop (name);
+				break;
 			case "Gram":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (4, name, 9600, 5600);
+				cropSelector.setCrop (name);
+				break;
 			case "Ground Nuts":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (7, name, 9800, 4500);
+				cropSelector.setCrop (name);
+				break;
 			case "Maize":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (2, name, 25000, 14000);
+				cropSelector.setCrop (name);
+				break;
 			case "Moong":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (6, name, 7200, 4500);
+				cropSelector.setCrop (name);
+				break;
 			case "Rice":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (1, name, 110000, 85000);
+				cropSelector.setCrop (name);
+				break;
 			case "Mustard":
-			case "Sugarcane":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (8, name, 8200, 5500);
+				cropSelector.setCrop (name);
+				break;
+			case "Sugercane":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (10, name, 370000, 270000);
+				cropSelector.setCrop (name);
+				break;
 			case "Wheat":
+				menuPloter.DisableRest (name);
+				menuPloter.PlotCrop (3, name, 96000, 68000);
 				cropSelector.setCrop (name);
 				break;
 		}
