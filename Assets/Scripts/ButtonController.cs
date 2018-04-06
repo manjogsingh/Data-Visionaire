@@ -6,6 +6,7 @@ using UnityEngine;
 public class ButtonController : MonoBehaviour {
 
 	public Transform buttonParent;
+	public GameObject subMenu;
 	List<Transform> buttons;
 	void Awake () {
 		buttons = new List<Transform> ();
@@ -17,14 +18,22 @@ public class ButtonController : MonoBehaviour {
 			if (btn.name.Equals (buttonName)) {
 				button = btn;
 			}
-		}Debug.Log(button.name+"  idhar");
+		}
 		AnimateButton (button);
 	}
 
+	public void ActivateSubMenu(Transform button){
+		if(subMenu.activeSelf){
+			subMenu.SetActive(false);
+		}
+		else{
+			subMenu.SetActive(true);
+			AnimateButton(button);
+		}
+	}
+
 	void AnimateButton (Transform button) {
-		Sequence buttonPress = DOTween.Sequence ();
-		buttonPress.Append (button.DOMoveZ (button.localPosition.z + -0.0070f, 1, false));//TODO y animation
-		buttonPress.Append (button.DOMoveZ (button.localPosition.z, 1, false));//TODO return animation
-		Debug.Log(button.name+"  udhar");
+		DOTween.CompleteAll();
+		button.DOPunchPosition(new Vector3(0,0,-0.0065f),1,1,1,false).IsComplete();
 	}
 }
