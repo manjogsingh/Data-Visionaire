@@ -15,7 +15,7 @@ public class DataGraphProduction : MonoBehaviour {
 	public Text cropName;
 
 	// Indices for columns to be assigned
-	int year = 0, Rice = 1, Maize = 2, Wheat = 3, Gram = 4, Arhar = 5, Moong = 6, groundNuts = 7, Mustard = 8, Cotton = 9, Sugercane = 10;
+	int year = 0;
 
 	// Full column names
 	public string xName;
