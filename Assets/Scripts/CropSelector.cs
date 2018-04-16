@@ -5,13 +5,10 @@ using UnityEngine.UI;
 
 public class CropSelector : MonoBehaviour {
 	string cropName;
-	// void Update () {
-	// 	foreach (var toggle in gameObject.GetComponent<ToggleGroup> ().ActiveToggles ()) {
-	// 		cropName = toggle.name;
-	// 	}
-	// }
-	public void setCrop(string value){
-		cropName=value;
+	public CropData cropData;
+	public void setCrop (string value) {
+		cropName = value;
+		cropData.GetCropData (cropName.ToLower());
 	}
 
 	public string SelectedCrop () {

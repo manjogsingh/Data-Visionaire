@@ -32,7 +32,7 @@ public class Threshold : MonoBehaviour {
 	float zMin = 30f;
 	float wMin = 300f;
 
-	void Start () {
+	void Awake () {
 		inputFile = "Thresholds";
 		pointList = CSVReader.Read (inputFile);
 		List<string> columnList = new List<string> (pointList[1].Keys);
