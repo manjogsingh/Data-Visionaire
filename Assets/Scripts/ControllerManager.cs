@@ -205,7 +205,7 @@ public class ControllerManager : MonoBehaviour {
 				cropSelector.setCrop (name);
 				// growthSimulation.Grow(name);
 				break;
-			case "Sugercane":
+			case "Sugarcane":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (10, name, 370000, 270000);
 				cropSelector.setCrop (name);
