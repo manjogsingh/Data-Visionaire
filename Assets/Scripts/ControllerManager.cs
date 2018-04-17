@@ -20,6 +20,8 @@ public class ControllerManager : MonoBehaviour {
 	public bool isLeftHanded;
 	#endregion
 
+	public Material day, night;
+
 	[Header ("Script Refrences")]
 	//public Button plot, cluster, menuPlot;
 	public DataPlotter dataPlotter;
@@ -69,6 +71,7 @@ public class ControllerManager : MonoBehaviour {
 
 				if (Physics.Raycast (transform.position, transform.forward, out hit, 10, laserMask)) {
 					teleportLocation = hit.point;
+					menuPloter.SetValue (hit.transform);
 					laser.SetPosition (1, teleportLocation);
 				}
 			}
@@ -150,12 +153,17 @@ public class ControllerManager : MonoBehaviour {
 				costAnalysis.YieldKGVsState ();
 				break;
 			case "Button10":
-			//reset
+				// day
+				if (RenderSettings.skybox.name == "CloudyCrown_Midday")
+					RenderSettings.skybox = night;
+				else
+					RenderSettings.skybox = day;
 				break;
 			case "Button11":
+				//reset
 				break;
 			case "Button12":
-			//restart
+				//restart
 				break;
 			case "Arhar":
 				menuPloter.DisableRest (name);
