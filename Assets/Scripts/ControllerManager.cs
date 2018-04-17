@@ -157,10 +157,10 @@ public class ControllerManager : MonoBehaviour {
 				break;
 			case "Button10":
 				// day
-				if (RenderSettings.skybox.name == "CloudyCrown_Midday")
-					RenderSettings.skybox = night;
-				else
+				if (RenderSettings.skybox.name == "CloudyCrown_Midnight")
 					RenderSettings.skybox = day;
+				else
+					RenderSettings.skybox = night;
 				break;
 			case "Button11":
 				//reset
