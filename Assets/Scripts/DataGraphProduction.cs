@@ -107,11 +107,9 @@ public class DataGraphProduction : MonoBehaviour {
 	}
 
 	public void SetValue (Transform hit) {
-		Debug.Log (hit.gameObject.name);
 		string name = hit.name;
 		if (name.StartsWith ("Crop")) {
 			int length = name.IndexOf (")") - name.IndexOf (",") - 2;
-			Debug.Log (length);
 			xValue.text = "X = " + name.Substring (name.IndexOf ("(") + 1, 4);
 			yValue.text = "Y = " + name.Substring (name.IndexOf (",") + 2, length);
 		}
