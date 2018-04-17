@@ -40,7 +40,7 @@ public class CropData : MonoBehaviour {
 				cropCount=0;
 				foreach (string key in stateName.Keys) {
 					int a = (int) jsonObject[key];
-					if (a == 0) {
+					if (a == 1) {
 						cropValues.Add (key);
 						cropCount++;
 					}
