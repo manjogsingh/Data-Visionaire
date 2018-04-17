@@ -11,7 +11,7 @@ public class DataGraphProduction : MonoBehaviour {
 	public GameObject dataPointPrefab;
 	public float plotScaleX = 100;
 	public float plotScaleY = 100;
-	public Text xAxis, yAxis;
+	public Text xAxis, yAxis, xValue, yValue;
 
 	// Indices for columns to be assigned
 	int year = 0;
@@ -29,7 +29,8 @@ public class DataGraphProduction : MonoBehaviour {
 				GameObject obj = Instantiate (dataPointPrefab);
 				obj.SetActive (false);
 				obj.transform.SetParent (t);
-				obj.layer = 5;
+				obj.layer = 5	;
+				obj.tag = "DataPoint";
 				obj.transform.localScale *= 2;
 			}
 		}
@@ -60,6 +61,7 @@ public class DataGraphProduction : MonoBehaviour {
 
 			// Assigns original values to dataPointName
 			string dataPointName =
+				"Crop " +
 				lineName + " (" +
 				pointList[i][xName] + ", " +
 				pointList[i][yName] + ")";
@@ -101,6 +103,16 @@ public class DataGraphProduction : MonoBehaviour {
 				continue;
 			}
 			transform.GetChild (i).gameObject.SetActive (false);
+		}
+	}
+
+	public void SetValue (Transform hit) {
+		Debug.Log (hit.gameObject.name);
+		string name = hit.name;
+		if (name.StartsWith ("Crop")) {
+			int length = name.IndexOf (")") - name.IndexOf ("(");
+			xValue.text = name.Substring (name.IndexOf ("(") + 1, 4);
+			yValue.text = name.Substring (name.IndexOf (",") + 2, length);
 		}
 	}
 }
