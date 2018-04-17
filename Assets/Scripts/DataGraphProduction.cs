@@ -29,7 +29,7 @@ public class DataGraphProduction : MonoBehaviour {
 				GameObject obj = Instantiate (dataPointPrefab);
 				obj.SetActive (false);
 				obj.transform.SetParent (t);
-				obj.layer = 5	;
+				obj.layer = 5;
 				obj.tag = "DataPoint";
 				obj.transform.localScale *= 2;
 			}
@@ -110,9 +110,10 @@ public class DataGraphProduction : MonoBehaviour {
 		Debug.Log (hit.gameObject.name);
 		string name = hit.name;
 		if (name.StartsWith ("Crop")) {
-			int length = name.IndexOf (")") - name.IndexOf ("(");
-			xValue.text = name.Substring (name.IndexOf ("(") + 1, 4);
-			yValue.text = name.Substring (name.IndexOf (",") + 2, length);
+			int length = name.IndexOf (")") - name.IndexOf (",") - 2;
+			Debug.Log (length);
+			xValue.text = "X = " + name.Substring (name.IndexOf ("(") + 1, 4);
+			yValue.text = "Y = " + name.Substring (name.IndexOf (",") + 2, length);
 		}
 	}
 }

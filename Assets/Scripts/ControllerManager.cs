@@ -71,8 +71,11 @@ public class ControllerManager : MonoBehaviour {
 
 				if (Physics.Raycast (transform.position, transform.forward, out hit, 10, laserMask)) {
 					teleportLocation = hit.point;
-					menuPloter.SetValue (hit.transform);
 					laser.SetPosition (1, teleportLocation);
+
+					float zSize = hit.point.z - laser.GetPosition (0).z + 0.5f;
+					laser.GetComponent<BoxCollider> ().size = new Vector3 (0, 0, zSize);
+					laser.GetComponent<BoxCollider> ().center = new Vector3 (0, 0, zSize / 2);
 				}
 			}
 			if (device.GetTouchUp (SteamVR_Controller.ButtonMask.Touchpad)) {
