@@ -6,24 +6,26 @@ using UnityEngine.UI;
 public class DataPlotter : MonoBehaviour {
 
 	private List<Dictionary<string, object>> pointList;
-	private bool bihar, punjab, haryana, mumbai, gujrat, bhopal, westBengal,uttarPradesh,hyderabad,jaipur = false;
+	private bool bihar, punjab, haryana, mumbai, gujrat, bhopal, westBengal, uttarPradesh, hyderabad, jaipur = false;
 	public string inputFile;
 	public GameObject dataPointPrefab;
 	public Transform plottedPoints;
 	public float plotScale = 8;
-	public Transform biharTransform, punjabTransform, mumbaiTransform, haryanaTransform, gujratTransform, bhopalTransform,westBengalTransform,uttarPradeshTransform,hyderabadTransform,jaipurTransform;
+	public Transform biharTransform, punjabTransform, mumbaiTransform, haryanaTransform, gujratTransform, bhopalTransform, westBengalTransform, uttarPradeshTransform, hyderabadTransform, jaipurTransform;
 
 	// Indices for columns to be assigned
-	public int columnX = 0;
-	public int columnY = 1;
-	public int columnZ = 2;
-	public int columnW = 3;
+	int columnX = 0;
+	int columnY = 1;
+	int columnZ = 2;
+	int columnW = 3;
 
 	// Full column names
-	public string xName;
-	public string yName;
-	public string zName;
-	public string wName;
+	string xName;
+	string yName;
+	string zName;
+	string wName;
+
+	public Text xAxis, yAxis, zAxis;
 
 	void PlotFile (string fileName, Transform parent) {
 		inputFile = fileName;
@@ -36,10 +38,9 @@ public class DataPlotter : MonoBehaviour {
 		zName = columnList[columnZ];
 		wName = columnList[columnW];
 
-		plottedPoints.Find ("X-Axis").GetComponent<TextMesh> ().text = xName;
-		plottedPoints.Find ("Y-Axis").GetComponent<TextMesh> ().text = yName;
-		plottedPoints.Find ("Z-Axis").GetComponent<TextMesh> ().text = zName;
-		plottedPoints.Find ("W-Axis").GetComponent<TextMesh> ().text = wName;
+		xAxis.text = wName;
+		yAxis.text = yName;
+		zAxis.text = zName;
 
 		//Only for single csv
 		// // Get maxes of each axis
