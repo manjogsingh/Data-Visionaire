@@ -27,6 +27,8 @@ public class ControllerManager : MonoBehaviour {
 	public CropSelector cropSelector;
 	public DataGraphProduction menuPloter;
 	public ButtonController buttonController;
+	public DataGraphCostAnalysis costAnalysis;
+	// public Growth growthSimulation;
 
 	public Toggle Arhar, Cotton, Gram, Groundnut, Maize, Mung, Paddy, Mustard, Sugarcane, Wheat;
 
@@ -132,55 +134,88 @@ public class ControllerManager : MonoBehaviour {
 			case "Button4":
 				buttonController.ActivateSubMenu (button);
 				break;
+			case "Button5":
+				costAnalysis.CostOfCultivationPerHectareVsState ();
+				break;
+			case "Button6":
+				costAnalysis.YieldVsCrop ();
+				break;
+			case "Button7":
+				costAnalysis.PerHectareCostPriceVsState ();
+				break;
+			case "Button8":
+				costAnalysis.YieldVsState ();
+				break;
+			case "Button9":
+				costAnalysis.YieldKGVsState ();
+				break;
+			case "Button10":
+			//reset
+				break;
+			case "Button11":
+				break;
+			case "Button12":
+			//restart
+				break;
 			case "Arhar":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (5, name, 3200, 2200);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Cotton":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (9, name, 36000, 18000);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Gram":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (4, name, 9600, 5600);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Ground Nuts":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (7, name, 9800, 4500);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Maize":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (2, name, 25000, 14000);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Moong":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (6, name, 7200, 4500);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Rice":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (1, name, 110000, 85000);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Mustard":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (8, name, 8200, 5500);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Sugercane":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (10, name, 370000, 270000);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 			case "Wheat":
 				menuPloter.DisableRest (name);
 				menuPloter.PlotCrop (3, name, 96000, 68000);
 				cropSelector.setCrop (name);
+				// growthSimulation.Grow(name);
 				break;
 		}
 	}
