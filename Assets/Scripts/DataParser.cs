@@ -37,7 +37,7 @@ public class DataParser : MonoBehaviour {
 
 	public string GetRainfallValues(string name,string year){
 		int y=int.Parse(year) %2000;
-		string ys="y"+year;
+		// string ys="y"+year;
 		for(int i=0;i<jsonObject.Count;i++)
 		{
 			Debug.Log(states[i].name);
