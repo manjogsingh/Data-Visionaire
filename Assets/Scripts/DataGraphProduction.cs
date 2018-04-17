@@ -11,8 +11,7 @@ public class DataGraphProduction : MonoBehaviour {
 	public GameObject dataPointPrefab;
 	public float plotScaleX = 100;
 	public float plotScaleY = 100;
-
-	public Text cropName;
+	public Text xAxis, yAxis;
 
 	// Indices for columns to be assigned
 	int year = 0;
@@ -20,9 +19,20 @@ public class DataGraphProduction : MonoBehaviour {
 	// Full column names
 	public string xName;
 	public string yName;
+	bool allCrop = false;
 
 	void Awake () {
 		pointList = CSVReader.Read (inputFile);
+		for (int i = 0; i < transform.childCount; i++) {
+			Transform t = transform.GetChild (i);
+			for (int j = 0; j < 11; j++) {
+				GameObject obj = Instantiate (dataPointPrefab);
+				obj.SetActive (false);
+				obj.transform.SetParent (t);
+				obj.layer = 5;
+				obj.transform.localScale *= 2;
+			}
+		}
 	}
 
 	public void PlotCrop (int cropIndex, string lineName, float yMax = 370000f, float yMin = 1000f) {
@@ -33,6 +43,13 @@ public class DataGraphProduction : MonoBehaviour {
 		xName = columnList[year];
 		yName = columnList[cropIndex];
 
+		xAxis.text = xName;
+		if (allCrop) {
+			yAxis.text = "All Crop Productions";
+		} else {
+			yAxis.text = yName + " Production";
+		}
+
 		float xMax = 2015f;
 		float xMin = 2005f;
 
@@ -41,23 +58,19 @@ public class DataGraphProduction : MonoBehaviour {
 			float x = (System.Convert.ToSingle (pointList[i][xName]) - xMin) / (xMax - xMin);
 			float y = (System.Convert.ToSingle (pointList[i][yName]) - yMin) / (yMax - yMin);
 
-			// //instantiate the prefab with coordinates defined above
+			// Assigns original values to dataPointName
+			string dataPointName =
+				lineName + " (" +
+				pointList[i][xName] + ", " +
+				pointList[i][yName] + ")";
 
-			// GameObject obj = Instantiate (dataPointPrefab); //, new Vector2 (x, y) , Quaternion.identity);
-			// obj.transform.SetParent (transform);
-			// obj.transform.localPosition = new Vector3 (x * 800, y * 500, 0);
+			Transform parent = transform.Find (lineName);
+			Transform child = parent.GetChild (i);
 
-			// // Assigns original values to dataPointName
-			// string dataPointName =
-			// 	lineName + " (" +
-			// 	pointList[i][xName] + ", " +
-			// 	pointList[i][yName] + ")";
-
-			// // Assigns name to the prefab
-			// obj.transform.name = dataPointName;
-			// //obj.GetComponent<PointValue> ().setValue (dataPointName);
-			// // Gets material color and sets it to a new RGB color we define
-			// obj.GetComponent<Renderer> ().material.color = new Color (x, y, 1.0f);
+			child.gameObject.SetActive (true);
+			child.localPosition = new Vector3 (x * plotScaleX, y * plotScaleY, 0);
+			child.name = dataPointName;
+			child.GetComponent<Renderer> ().material.color = line.startColor;
 
 			line.SetPosition (i, new Vector3 (x * plotScaleX, y * plotScaleY, 0));
 		}
@@ -67,6 +80,7 @@ public class DataGraphProduction : MonoBehaviour {
 		for (int i = 0; i < transform.childCount; i++) {
 			transform.GetChild (i).gameObject.SetActive (true);
 		}
+		allCrop = true;
 		PlotCrop (1, "Rice");
 		PlotCrop (2, "Maize");
 		PlotCrop (3, "Wheat");
@@ -76,14 +90,14 @@ public class DataGraphProduction : MonoBehaviour {
 		PlotCrop (7, "Ground Nuts");
 		PlotCrop (8, "Mustard");
 		PlotCrop (9, "Cotton");
-		PlotCrop (10, "Sugercane");
+		PlotCrop (10, "Sugarcane");
+		allCrop = false;
 	}
 
 	public void DisableRest (string lineName) {
 		for (int i = 0; i < transform.childCount; i++) {
 			if (transform.GetChild (i).name.Equals (lineName)) {
 				transform.GetChild (i).gameObject.SetActive (true);
-				cropName.text = lineName;
 				continue;
 			}
 			transform.GetChild (i).gameObject.SetActive (false);
