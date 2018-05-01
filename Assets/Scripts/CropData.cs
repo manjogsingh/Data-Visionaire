@@ -7,7 +7,7 @@ public class CropData : MonoBehaviour {
 
 	WWW www;
 	JsonData jsonObject;
-	public string url = "https://e5c1f58e.ngrok.io/prediction?crop=";
+	public string url = "";
 	public int cropCount=0;
 	public List<string> cropValues = new List<string> ();
 	Dictionary<string, int> stateName = new Dictionary<string, int> ();
@@ -32,6 +32,7 @@ public class CropData : MonoBehaviour {
 	IEnumerator YieldData (string uri) {
 		www = new WWW (uri);
 		yield return www;
+		Debug.Log(www.text);
 		while (true) {
 			if (www.isDone) {
 				jsonObject = JsonMapper.ToObject (www.text);
