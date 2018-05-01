@@ -82,7 +82,7 @@ public class DataGraphCostAnalysis : MonoBehaviour {
 				obj.transform.localPosition = new Vector3 (0.5f * xMin, 0, 0);
 				if (xMin == xMax) { xMin = 0; } else { xMin++; }
 			}
-			obj.transform.DOScale (new Vector3 (0.1f, 0.1f, y * plotScaleY), 4);//latest
+			obj.transform.DOScale (new Vector3 (0.1f, 0.1f, y * plotScaleY), 10);//latest
 			// obj.transform.localScale = new Vector3 (0.1f, 0.1f, y * plotScaleY);
 
 			// // Assigns original values to dataPointName
