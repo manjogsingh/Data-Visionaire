@@ -21,10 +21,10 @@ public class Clustering : MonoBehaviour {
 
 	public void Cluster () {
 		thresholdPoint = threshold.GetComponent<Threshold> ().setActiveThreshold ();
-		//try {
+		try {
 		center = thresholdPoint.transform.position;
 		hitColliders = Physics.OverlapSphere (center, radius, 1 << 10);
-		Debug.Log (cropData.cropValues.Count);
+		// Debug.Log (cropData.cropValues.Count);
 		List<Transform> child = new List<Transform> ();
 		foreach (string item in cropData.cropValues) {
 			child.Add (transform.Find (item));
@@ -52,9 +52,9 @@ public class Clustering : MonoBehaviour {
 			inOut.Insert (speed, (neighbours[i].transform.DOMove (positions[i], speed, false)));
 			inOut.Insert (speed, (neighbours[i].GetComponent<Renderer> ().material.DOColor (Color.red, speed)));
 		}
-		// } catch (Exception e) {
-		// 	Debug.LogException (e);
-		// }
+		} catch (Exception e) {
+			Debug.LogException (e);
+		}
 	}
 
 }
